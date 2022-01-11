@@ -14,13 +14,9 @@ describe("Object creation tests", () => {
       new Person("a", "Francisco Díaz", 21);
     }).to.throw();
   });
-  it("Validate the incorrect creation of a person with name: 'Vladimir', nickname: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' and age: 21", () => {
+  it("Validate the incorrect creation of a person with name: 'Vladimir', nickname: 'a' repeated 200 times and age: 21", () => {
     expect(() => {
-      new Person(
-        "Vladimir",
-        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        21
-      );
+      new Person("Vladimir", "a".repeat(200), 21);
     }).to.throw();
   });
   it("Validate the incorrect creation of a person with name: 'Vladimir', nickname: 'Francisco Díaz' and age: 121", () => {
@@ -36,6 +32,6 @@ describe("Object creation tests", () => {
   it("Validate the incorrect creation of a person with name: 'Vladimi$', nickname: 'Francisco Díaz' and age: 21", () => {
     expect(() => {
       new Person("Vladimi$", "Francisco Díaz", 21);
-    }).to.not.throw();
+    }).to.throw();
   });
 });

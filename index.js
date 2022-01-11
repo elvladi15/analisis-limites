@@ -1,32 +1,31 @@
-class Person {
-  constructor(name, nickname, age) {
-    const err = new Error("Invalid Object creation!");
+function isValidString(str) {
+  function isValidCharacter(char) {
+    const ascii = char.charCodeAt(0);
+    //lowercases in english
+    if (ascii >= 97 && ascii <= 122) return true;
+    //uppercases in english
+    if (ascii >= 65 && ascii <= 90) return true;
+    // lowercase vowels with accent
+    if (char === "á" || char === "é" || char === "í" || char === "ó" || char === "ú") return true;
+    // uppercase vowels with accent
+    if (char === "Á" || char === "É" || char === "Í" || char === "Ó" || char === "Ú") return true;
+    // ñ and Ñ
+    if (char === "ñ" || char === "Ñ") return true;
 
-    function isValidString(str) {
-      function isValidCharacter(char) {
-        const ascii = char.charCodeAt(0);
-        //lowercases in english
-        if (ascii >= 97 && ascii <= 122) return true;
-        //uppercases in english
-        if (ascii >= 65 && ascii <= 90) return true;
-        // lowercase vowels with accent
-        if (char === "á" || char === "é" || char === "í" || char === "ó" || char === "ú")
-          return true;
-        // uppercase vowels with accent
-        if (char === "Á" || char === "É" || char === "Í" || char === "Ó" || char === "Ú")
-          return true;
-        // ñ and Ñ
-        if (char === "ñ" || char === "Ñ") return true;
-
+    return false;
+  }
+  const strArr = str.split(" ");
+  for (const word of strArr) {
+    for (const char of word) {
+      if (!isValidCharacter(char)) {
         return false;
       }
-      for (let i = 0; i < str.length; i++) {
-        if (!isValidCharacter()) {
-          return false;
-        }
-      }
-      return true;
     }
+  }
+  return true;
+}
+class Person {
+  constructor(name, nickname, age) {
     function isValidName() {
       if (name == null) return false;
       if (typeof name !== "string") return false;
@@ -54,7 +53,7 @@ class Person {
       this.nickname = nickname;
       this.age = age;
     } else {
-      throw err;
+      throw new Error();
     }
   }
 }
